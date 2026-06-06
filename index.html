@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fortron® PPS – Process Flow Diagram (Hoechst Celanese / Ticona Route)</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Barlow+Condensed:wght@300;400;600;700&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --panel: #161b22;
+    --border: #30363d;
+    --accent: #f0a500;
+    --text: #c9d1d9;
+    --text-dim: #6e7681;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Barlow Condensed', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  header {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  header span {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    letter-spacing: 0.04em;
+  }
+
+  .diagram-wrap { overflow-x: auto; overflow-y: visible; }
+
+  svg { display: block; min-width: 1340px; }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 26px;
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 0.76rem;
+    color: var(--text-dim);
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .legend-line { width: 32px; height: 3px; border-radius: 2px; }
+
+  .notes {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: var(--panel);
+    border-left: 3px solid var(--accent);
+    font-size: 0.81rem;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  .notes strong { color: var(--accent); }
+
+  table.cond-table {
+    margin-top: 14px;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.78rem;
+    font-family: 'Share Tech Mono', monospace;
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+  table.cond-table th {
+    background: #1f2937;
+    color: var(--accent);
+    font-weight: 600;
+    padding: 7px 10px;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.05em;
+  }
+  table.cond-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #21262d;
+    color: var(--text);
+    vertical-align: top;
+  }
+  table.cond-table tr:last-child td { border-bottom: none; }
+  table.cond-table tr:hover td { background: #1c2230; }
+  .ref { color: #6e7681; font-size: 0.7rem; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Fortron® PPS — Process Flow Diagram</h1>
+  <span>Hoechst Celanese / Ticona Two-Stage Polycondensation Route · US 4,910,294 / EP 0256757 / EP 0259984</span>
+</header>
+
+<div class="diagram-wrap">
+<!--
+  LAYOUT (left→right, 1340 wide × 640 tall):
+
+  Section 1 (0–155):    Feed Preparation  — T-01 NaSH+NaOH mix vessel, T-02 DCB tank, T-03 NMP tank
+  Section 2 (155–310):  Dehydration       — V-01 dehydration autoclave, E-01 condenser/H2O KO
+  Section 3 (310–530):  Polymerisation    — R-01 Stage-1 autoclave (220°C), R-02 Stage-2 / high-T vessel (260°C)
+  Section 4 (530–680):  Quench & Separation — QV-01 quench vessel, F-01 pressure filter
+  Section 5 (680–870):  NMP Recovery      — C-01 NMP distillation column
+  Section 6 (870–1080): Purification      — W-01 hot-water wash loop (multi-stage), D-01 centrifuge, DR-01 N2 dryer
+  Section 7 (1080–1340):Finishing         — Screen/classifier, EX-01 twin-screw extruder, S-01 product silo
+-->
+<svg viewBox="0 0 1340 640" width="1340" height="640" xmlns="http://www.w3.org/2000/svg">
+<defs>
+  <!-- Arrow markers -->
+  <marker id="am" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#c9d1d9"/></marker>
+  <marker id="ah" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#f06595"/></marker>
+  <marker id="ac" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#4dabf7"/></marker>
+  <marker id="as" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#a9e34b"/></marker>
+  <marker id="ar" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#da77f2"/></marker>
+  <marker id="ao" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#f0a500"/></marker>
+  <marker id="ae" markerWidth="7" markerHeight="6" refX="6" refY="3" orient="auto"><polygon points="0 0,7 3,0 6" fill="#e05c5c"/></marker>
+
+  <!-- Vessel gradients -->
+  <linearGradient id="gv" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#1e2d40"/><stop offset="100%" stop-color="#0f1923"/>
+  </linearGradient>
+  <linearGradient id="gr1" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2a1f0f"/><stop offset="100%" stop-color="#1a1005"/>
+  </linearGradient>
+  <linearGradient id="gr2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#2a1a05"/><stop offset="100%" stop-color="#180f02"/>
+  </linearGradient>
+  <linearGradient id="gs" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#112020"/><stop offset="100%" stop-color="#081414"/>
+  </linearGradient>
+</defs>
+
+<!-- ═══ SECTION BACKGROUNDS ═══ -->
+<rect x="2"    y="2" width="153" height="636" rx="3" fill="#111820" stroke="#1e2a38" stroke-width="1"/>
+<rect x="157"  y="2" width="153" height="636" rx="3" fill="#111820" stroke="#1e2a38" stroke-width="1"/>
+<rect x="312"  y="2" width="218" height="636" rx="3" fill="#1a1408" stroke="#2a2010" stroke-width="1"/>
+<rect x="532"  y="2" width="148" height="636" rx="3" fill="#111820" stroke="#1e2a38" stroke-width="1"/>
+<rect x="682"  y="2" width="188" height="636" rx="3" fill="#0e1a14" stroke="#1a2e20" stroke-width="1"/>
+<rect x="872"  y="2" width="208" height="636" rx="3" fill="#0e1a12" stroke="#1a2e1e" stroke-width="1"/>
+<rect x="1082" y="2" width="256" height="636" rx="3" fill="#0e1015" stroke="#1a1e26" stroke-width="1"/>
+
+<!-- Section titles -->
+<text x="78"   y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">FEED PREP</text>
+<text x="233"  y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">DEHYDRATION</text>
+<text x="421"  y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">TWO-STAGE POLYMERISATION</text>
+<text x="606"  y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">QUENCH / SEP</text>
+<text x="776"  y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">NMP RECOVERY</text>
+<text x="976"  y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">PURIFICATION</text>
+<text x="1210" y="18" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8" letter-spacing="1.5">FINISHING</text>
+
+<!-- ══════════════════════════════════
+     FEED PREP
+══════════════════════════════════════ -->
+<!-- T-01: NaSH + NaOH mix vessel (generates Na2S in-situ) -->
+<rect x="12" y="50" width="72" height="58" rx="4" fill="url(#gv)" stroke="#30363d" stroke-width="1.5"/>
+<ellipse cx="48" cy="108" rx="36" ry="7" fill="#0f1923" stroke="#30363d" stroke-width="1.2"/>
+<text x="48" y="68"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">MV-01</text>
+<text x="48" y="82"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">NaSH + NaOH</text>
+<text x="48" y="93"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">Mix Vessel</text>
+<text x="48" y="104" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">(→Na₂S in NMP)</text>
+<text x="12" y="46"  fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">NaSH soln + NaOH</text>
+
+<!-- T-02: NaOAc (polymerisation aid) -->
+<rect x="12" y="175" width="72" height="50" rx="4" fill="url(#gv)" stroke="#30363d" stroke-width="1.5"/>
+<ellipse cx="48" cy="225" rx="36" ry="6" fill="#0f1923" stroke="#30363d" stroke-width="1.2"/>
+<text x="48" y="192" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">T-02</text>
+<text x="48" y="204" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">NaOAc</text>
+<text x="48" y="215" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">Dissolving Tank</text>
+<text x="12" y="171" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">NaOAc (polymsn aid)</text>
+
+<!-- T-03: p-DCB storage -->
+<rect x="12" y="305" width="72" height="50" rx="4" fill="url(#gv)" stroke="#30363d" stroke-width="1.5"/>
+<ellipse cx="48" cy="355" rx="36" ry="6" fill="#0f1923" stroke="#30363d" stroke-width="1.2"/>
+<text x="48" y="323" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">T-03</text>
+<text x="48" y="335" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">p-DCB</text>
+<text x="48" y="346" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">Storage Tank</text>
+<text x="12" y="301" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">p-DCB feed</text>
+
+<!-- T-04: NMP storage (fresh + recycle) -->
+<rect x="12" y="435" width="72" height="50" rx="4" fill="url(#gv)" stroke="#30363d" stroke-width="1.5"/>
+<ellipse cx="48" cy="485" rx="36" ry="6" fill="#0f1923" stroke="#30363d" stroke-width="1.2"/>
+<text x="48" y="453" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">T-04</text>
+<text x="48" y="465" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">NMP Tank</text>
+<text x="48" y="476" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">(fresh + recycle)</text>
+<text x="12" y="431" fill="#da77f2" font-family="'Share Tech Mono',monospace" font-size="7.5">NMP (closed-loop)</text>
+
+<!-- ══════════════════════════════════
+     DEHYDRATION
+══════════════════════════════════════ -->
+<!-- V-01: Dehydration autoclave -->
+<rect x="172" y="45" width="84" height="120" rx="5" fill="url(#gv)" stroke="#30363d" stroke-width="1.5"/>
+<text x="214" y="65"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">V-01</text>
+<text x="214" y="79"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="600">Dehydration</text>
+<text x="214" y="91"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="600">Autoclave</text>
+<text x="214" y="107" text-anchor="middle" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="8">185–205°C</text>
+<text x="214" y="119" text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="8">0.3–0.5 MPa</text>
+<text x="214" y="131" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">N₂ atmosphere</text>
+<text x="214" y="143" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Titanium / SS316</text>
+<!-- agitator -->
+<line x1="214" y1="92" x2="214" y2="161" stroke="#2a3a50" stroke-width="1" stroke-dasharray="2,3"/>
+<line x1="196" y1="130" x2="232" y2="130" stroke="#4dabf7" stroke-width="1.5"/>
+<polygon points="214,118 206,128 222,128" fill="#4dabf7" opacity="0.7"/>
+
+<!-- E-01: H2O condenser / overhead knockpot -->
+<rect x="178" y="198" width="72" height="36" rx="3" fill="#0f1a2a" stroke="#2060a0" stroke-width="1.5"/>
+<text x="214" y="213" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">E-01</text>
+<text x="214" y="226" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">H₂O Condenser/KO</text>
+
+<!-- H2O out from E-01 -->
+<line x1="214" y1="234" x2="214" y2="262" stroke="#4dabf7" stroke-width="1.5" marker-end="url(#ac)"/>
+<text x="220" y="252" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">H₂O → ETP</text>
+
+<!-- ══════════════════════════════════
+     STAGE 1 REACTOR (R-01)
+══════════════════════════════════════ -->
+<rect x="325" y="38" width="96" height="175" rx="6" fill="url(#gr1)" stroke="#f0a500" stroke-width="2"/>
+<!-- jacket strips -->
+<rect x="321" y="34" width="4" height="183" rx="2" fill="#f06595" opacity="0.35"/>
+<rect x="421" y="34" width="4" height="183" rx="2" fill="#f06595" opacity="0.35"/>
+<text x="373" y="60"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">R-01</text>
+<text x="373" y="74"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700">Stage-1</text>
+<text x="373" y="87"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700">Autoclave</text>
+<text x="373" y="104" text-anchor="middle" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="9">210–230°C</text>
+<text x="373" y="118" text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="8">0.5–0.8 MPa</text>
+<text x="373" y="131" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">2–4 h residence</text>
+<text x="373" y="143" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">80–95% conversion</text>
+<text x="373" y="155" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">NaCl ppt. in situ</text>
+<text x="373" y="168" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Halogen-term.</text>
+<text x="373" y="180" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">prepolymer formed</text>
+<!-- Hastelloy label -->
+<text x="319" y="130" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="6.5" transform="rotate(-90,319,130)">HASTELLOY C-276</text>
+<!-- agitator -->
+<line x1="373" y1="88" x2="373" y2="210" stroke="#40300a" stroke-width="1.2" stroke-dasharray="3,3"/>
+<line x1="350" y1="148" x2="396" y2="148" stroke="#f0a500" stroke-width="2"/>
+<line x1="350" y1="170" x2="396" y2="170" stroke="#f0a500" stroke-width="2"/>
+<polygon points="373,136 363,147 383,147" fill="#f0a500" opacity="0.8"/>
+
+<!-- Water injection point between R-01 and R-02 (key Fortron step) -->
+<!-- Water addition arrow coming from above -->
+<line x1="460" y1="30" x2="460" y2="75" stroke="#4dabf7" stroke-width="1.8" stroke-dasharray="4,2" marker-end="url(#ac)"/>
+<rect x="440" y="10" width="100" height="22" rx="3" fill="#0a1a2a" stroke="#2060a0" stroke-width="1"/>
+<text x="490" y="20" text-anchor="middle" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">Water injection</text>
+<text x="490" y="29" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">6–15 mol/kg NMP</text>
+
+<!-- ══════════════════════════════════
+     STAGE 2 REACTOR (R-02)
+══════════════════════════════════════ -->
+<rect x="428" y="38" width="96" height="175" rx="6" fill="url(#gr2)" stroke="#ff8c00" stroke-width="2.5"/>
+<rect x="424" y="34" width="4" height="183" rx="2" fill="#ff6030" opacity="0.45"/>
+<rect x="524" y="34" width="4" height="183" rx="2" fill="#ff6030" opacity="0.45"/>
+<text x="476" y="60"  text-anchor="middle" fill="#ff8c00" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">R-02</text>
+<text x="476" y="74"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700">Stage-2</text>
+<text x="476" y="87"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="11" font-weight="700">High-T Reactor</text>
+<text x="476" y="104" text-anchor="middle" fill="#ff6030" font-family="'Share Tech Mono',monospace" font-size="9">250–270°C</text>
+<text x="476" y="118" text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="8">0.7–1.5 MPa</text>
+<text x="476" y="131" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">0.5–4 h</text>
+<text x="476" y="143" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">H₂O drives MW↑</text>
+<text x="476" y="155" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Two-phase system</text>
+<text x="476" y="168" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Linear high-MW</text>
+<text x="476" y="180" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">PPS formed</text>
+<text x="526" y="130" fill="#ff6030" font-family="'Share Tech Mono',monospace" font-size="6.5" transform="rotate(90,526,130)">HASTELLOY C-276</text>
+<!-- agitator -->
+<line x1="476" y1="88" x2="476" y2="210" stroke="#50280a" stroke-width="1.2" stroke-dasharray="3,3"/>
+<line x1="453" y1="148" x2="499" y2="148" stroke="#ff8c00" stroke-width="2"/>
+<line x1="453" y1="170" x2="499" y2="170" stroke="#ff8c00" stroke-width="2"/>
+<polygon points="476,136 466,147 486,147" fill="#ff8c00" opacity="0.8"/>
+
+<!-- R-01 → R-02 transfer line (prepolymer slurry) -->
+<line x1="421" y1="120" x2="428" y2="120" stroke="#f0a500" stroke-width="2.5" marker-end="url(#ao)"/>
+<text x="424" y="112" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="7">prepolymer</text>
+
+<!-- ══════════════════════════════════
+     QUENCH VESSEL (QV-01)
+══════════════════════════════════════ -->
+<rect x="548" y="50" width="84" height="100" rx="5" fill="url(#gv)" stroke="#00c2a8" stroke-width="1.5"/>
+<text x="590" y="69"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">QV-01</text>
+<text x="590" y="83"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="600">Quench Vessel</text>
+<text x="590" y="99"  text-anchor="middle" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="8">Controlled H₂O</text>
+<text x="590" y="111" text-anchor="middle" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="8">addition (VLE-calc)</text>
+<text x="590" y="124" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Particle size ctrl</text>
+<text x="590" y="136" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">PPS ppts out</text>
+<!-- quench water in from top -->
+<line x1="590" y1="30" x2="590" y2="50" stroke="#4dabf7" stroke-width="1.5" stroke-dasharray="3,2" marker-end="url(#ac)"/>
+<text x="596" y="43" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">Quench H₂O</text>
+
+<!-- F-01: Pressure filter / centrifuge -->
+<rect x="548" y="188" width="84" height="72" rx="4" fill="url(#gs)" stroke="#00c2a8" stroke-width="1.5"/>
+<ellipse cx="590" cy="224" rx="28" ry="28" fill="none" stroke="#00c2a8" stroke-width="1.2" stroke-dasharray="4,3"/>
+<text x="590" y="205" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">F-01</text>
+<text x="590" y="234" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Pressure</text>
+<text x="590" y="246" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Filter</text>
+
+<!-- QV-01 → F-01 -->
+<line x1="590" y1="150" x2="590" y2="188" stroke="#f0a500" stroke-width="2" marker-end="url(#ao)"/>
+<text x="596" y="172" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="7.5">PPS slurry</text>
+
+<!-- ══════════════════════════════════
+     NMP RECOVERY COLUMN (C-01)
+══════════════════════════════════════ -->
+<!-- Distillation column -->
+<rect x="706" y="55" width="60" height="145" rx="4" fill="url(#gs)" stroke="#00c2a8" stroke-width="1.5"/>
+<line x1="710" y1="90"  x2="762" y2="90"  stroke="#1a3a38" stroke-width="1"/>
+<line x1="710" y1="115" x2="762" y2="115" stroke="#1a3a38" stroke-width="1"/>
+<line x1="710" y1="140" x2="762" y2="140" stroke="#1a3a38" stroke-width="1"/>
+<line x1="710" y1="165" x2="762" y2="165" stroke="#1a3a38" stroke-width="1"/>
+<!-- condenser -->
+<rect x="714" y="40"  width="44" height="16" rx="2" fill="#0a1a2a" stroke="#4dabf7" stroke-width="1"/>
+<text x="736" y="51"  text-anchor="middle" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7">CW cond.</text>
+<!-- reboiler -->
+<rect x="714" y="200" width="44" height="16" rx="2" fill="#0a2020" stroke="#f06595" stroke-width="1"/>
+<text x="736" y="211" text-anchor="middle" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="7">Reboiler</text>
+<text x="736" y="77"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">C-01</text>
+<text x="736" y="89"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">NMP</text>
+<text x="736" y="101" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">Recovery</text>
+<text x="736" y="115" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">Column</text>
+<text x="736" y="131" text-anchor="middle" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="8">202°C (bp)</text>
+<text x="736" y="144" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Vac. option</text>
+
+<!-- F-01 filtrate → C-01 -->
+<line x1="632" y1="224" x2="670" y2="224" stroke="#4dabf7" stroke-width="1.8"/>
+<line x1="670" y1="224" x2="670" y2="130" stroke="#4dabf7" stroke-width="1.8"/>
+<line x1="670" y1="130" x2="706" y2="130" stroke="#4dabf7" stroke-width="1.8" marker-end="url(#ac)"/>
+<text x="650" y="240" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">Filtrate</text>
+<text x="650" y="251" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">(NMP+NaCl)</text>
+
+<!-- F-01 cake → W-01 (wet PPS) -->
+<line x1="590" y1="260" x2="590" y2="290" stroke="#a9e34b" stroke-width="2"/>
+<line x1="590" y1="290" x2="890" y2="290" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<text x="710" y="283" text-anchor="middle" fill="#a9e34b" font-family="'Share Tech Mono',monospace" font-size="7.5">Wet PPS cake</text>
+
+<!-- C-01 overhead NMP → T-04 recycle (bottom bus) -->
+<line x1="736" y1="40" x2="736" y2="28" stroke="#da77f2" stroke-width="1.8"/>
+<line x1="736" y1="28" x2="48"  y2="28" stroke="#da77f2" stroke-width="1.8" stroke-dasharray="5,3"/>
+<line x1="48"  y1="28" x2="48"  y2="50" stroke="#da77f2" stroke-width="1.8" marker-end="url(#ar)"/>
+<!-- NMP recycle label -->
+<text x="380" y="22" text-anchor="middle" fill="#da77f2" font-family="'Share Tech Mono',monospace" font-size="8">NMP RECYCLE → T-04</text>
+
+<!-- C-01 bottoms NaCl brine → ETP -->
+<line x1="736" y1="216" x2="736" y2="250" stroke="#e05c5c" stroke-width="1.5" marker-end="url(#ae)"/>
+<text x="742" y="238" fill="#e05c5c" font-family="'Share Tech Mono',monospace" font-size="7.5">NaCl brine</text>
+<text x="742" y="249" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">→ ETP / MVR</text>
+
+<!-- ══════════════════════════════════
+     PURIFICATION
+══════════════════════════════════════ -->
+<!-- W-01: Multi-stage Hot Water Wash -->
+<rect x="886" y="50" width="88" height="100" rx="4" fill="url(#gv)" stroke="#a9e34b" stroke-width="1.5"/>
+<text x="930" y="69"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">W-01</text>
+<text x="930" y="83"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="600">Multi-stage</text>
+<text x="930" y="95"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10" font-weight="600">Hot Water Wash</text>
+<text x="930" y="110" text-anchor="middle" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="8">90–100°C</text>
+<text x="930" y="123" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">DI water; 3–6 stages</text>
+<text x="930" y="136" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Cl⁻ endpoint (&lt;50 ppm)</text>
+<!-- agitator -->
+<line x1="930" y1="96" x2="930" y2="147" stroke="#2a3a2a" stroke-width="1" stroke-dasharray="2,3"/>
+<line x1="910" y1="125" x2="950" y2="125" stroke="#a9e34b" stroke-width="1.5"/>
+<!-- DI water in -->
+<line x1="930" y1="50" x2="930" y2="38" stroke="#4dabf7" stroke-width="1.2" stroke-dasharray="3,2"/>
+<text x="930" y="34" text-anchor="middle" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7">DI H₂O in</text>
+<!-- Wash water out (NaCl + residual NMP) -->
+<line x1="886" y1="90" x2="860" y2="90" stroke="#4dabf7" stroke-width="1.5" marker-end="url(#ac)"/>
+<text x="856" y="86" text-anchor="end" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7">Wash effluent → ETP</text>
+
+<!-- W-01 feed from wet cake line -->
+<line x1="890" y1="290" x2="930" y2="290" stroke="#a9e34b" stroke-width="2"/>
+<line x1="930" y1="290" x2="930" y2="150" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+
+<!-- D-01: Decanter centrifuge -->
+<rect x="886" y="185" width="88" height="60" rx="4" fill="url(#gv)" stroke="#a9e34b" stroke-width="1.5"/>
+<ellipse cx="930" cy="215" rx="24" ry="24" fill="none" stroke="#a9e34b" stroke-width="1.2" stroke-dasharray="3,3"/>
+<text x="930" y="204" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">D-01</text>
+<text x="930" y="222" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Decanter</text>
+<text x="930" y="234" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Centrifuge</text>
+<line x1="930" y1="150" x2="930" y2="185" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<!-- centrate out -->
+<line x1="886" y1="210" x2="862" y2="210" stroke="#4dabf7" stroke-width="1.5" marker-end="url(#ac)"/>
+<text x="858" y="206" text-anchor="end" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7">Centrate</text>
+
+<!-- DR-01: N2-swept flash/rotary dryer -->
+<rect x="886" y="285" width="88" height="72" rx="4" fill="url(#gv)" stroke="#a9e34b" stroke-width="1.5"/>
+<text x="930" y="303" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">DR-01</text>
+<text x="930" y="317" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">N₂-swept</text>
+<text x="930" y="329" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Flash/Rotary Dryer</text>
+<text x="930" y="343" text-anchor="middle" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="8">120–150°C, N₂</text>
+<text x="930" y="354" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">NMP &lt;100 ppm</text>
+<line x1="930" y1="245" x2="930" y2="285" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<!-- off-gas solvent scrubber -->
+<line x1="886" y1="305" x2="862" y2="305" stroke="#f06595" stroke-width="1.2" stroke-dasharray="3,2" marker-end="url(#ah)"/>
+<text x="858" y="301" text-anchor="end" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="7">N₂+NMP → scrubber</text>
+<!-- N2 in -->
+<line x1="974" y1="315" x2="994" y2="315" stroke="#6e7681" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="996" y="318" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">N₂ in</text>
+
+<!-- ══════════════════════════════════
+     FINISHING
+══════════════════════════════════════ -->
+<!-- SC-01: Screen/classifier -->
+<rect x="1098" y="55" width="80" height="60" rx="4" fill="url(#gv)" stroke="#c9d1d9" stroke-width="1.5"/>
+<text x="1138" y="74"  text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">SC-01</text>
+<text x="1138" y="88"  text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Sifter /</text>
+<text x="1138" y="100" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Classifier</text>
+<!-- dry powder from DR-01 to SC-01 -->
+<line x1="930" y1="357" x2="930" y2="410" stroke="#a9e34b" stroke-width="2"/>
+<line x1="930" y1="410" x2="1070" y2="410" stroke="#a9e34b" stroke-width="2"/>
+<line x1="1070" y1="410" x2="1070" y2="85"  stroke="#a9e34b" stroke-width="2"/>
+<line x1="1070" y1="85"  x2="1098" y2="85"  stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<text x="1010" y="403" text-anchor="middle" fill="#a9e34b" font-family="'Share Tech Mono',monospace" font-size="7.5">Dry PPS powder</text>
+
+<!-- off-spec fines recycle label -->
+<line x1="1098" y1="72" x2="1082" y2="72" stroke="#e05c5c" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="1078" y="68" text-anchor="end" fill="#e05c5c" font-family="'Share Tech Mono',monospace" font-size="7">Fines regrind</text>
+
+<!-- EX-01: Twin-screw extruder/compounder -->
+<polygon points="1098,155 1210,155 1210,215 1108,215" fill="#0e1015" stroke="#c9d1d9" stroke-width="1.5"/>
+<text x="1154" y="175" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">EX-01</text>
+<text x="1154" y="189" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Twin-Screw Extruder</text>
+<text x="1154" y="203" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">(Compounding)</text>
+<!-- SC-01 → EX-01 -->
+<line x1="1138" y1="115" x2="1138" y2="155" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<!-- GF / filler side-feed -->
+<line x1="1210" y1="182" x2="1240" y2="182" stroke="#c9d1d9" stroke-width="1.5"/>
+<polygon points="1210,182 1228,175 1228,189" fill="#c9d1d9"/>
+<text x="1244" y="178" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="7.5">GF 30–40%</text>
+<text x="1244" y="189" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">fillers/stabilisers</text>
+
+<!-- BL-01: Pelletiser / underwater pelletiser -->
+<rect x="1108" y="250" width="80" height="55" rx="4" fill="url(#gv)" stroke="#c9d1d9" stroke-width="1.5"/>
+<text x="1148" y="268" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">BL-01</text>
+<text x="1148" y="282" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Underwater</text>
+<text x="1148" y="295" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Pelletiser</text>
+<line x1="1148" y1="215" x2="1148" y2="250" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+
+<!-- S-01: Product silo -->
+<rect x="1108" y="345" width="80" height="65" rx="4" fill="url(#gv)" stroke="#c9d1d9" stroke-width="1.5"/>
+<text x="1148" y="363" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="9" font-weight="bold">S-01</text>
+<text x="1148" y="378" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="10">Product Silo</text>
+<text x="1148" y="393" text-anchor="middle" fill="#c9d1d9" font-family="'Barlow Condensed',sans-serif" font-size="9">N₂ padded</text>
+<line x1="1148" y1="305" x2="1148" y2="345" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<text x="1155" y="328" fill="#a9e34b" font-family="'Share Tech Mono',monospace" font-size="7.5">Pellets</text>
+
+<!-- Product out -->
+<line x1="1148" y1="410" x2="1148" y2="440" stroke="#a9e34b" stroke-width="2" marker-end="url(#as)"/>
+<text x="1148" y="458" text-anchor="middle" fill="#a9e34b" font-family="'Barlow Condensed',sans-serif" font-size="12" font-weight="700">FORTRON® PPS</text>
+<text x="1148" y="472" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="8">Linear high-MW · no curing</text>
+
+<!-- QA box -->
+<rect x="1098" y="490" width="200" height="50" rx="3" fill="#111820" stroke="#30363d" stroke-width="1"/>
+<text x="1198" y="507" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="8" font-weight="bold">QC / RELEASE</text>
+<text x="1198" y="520" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">MV @ 310°C · Cl⁻ · ash · MWD (GPC)</text>
+<text x="1198" y="532" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7.5">Extrusion rate (g/10 min) · colour</text>
+<line x1="1148" y1="472" x2="1148" y2="490" stroke="#6e7681" stroke-width="1" stroke-dasharray="3,2"/>
+
+<!-- ══════════════════════════════════
+     FEED STREAMS (V-01 inputs)
+══════════════════════════════════════ -->
+<!-- MV-01 → V-01 (Na2S/NMP slurry) -->
+<line x1="84"  y1="78"  x2="158" y2="78"  stroke="#c9d1d9" stroke-width="1.8" marker-end="url(#am)"/>
+<line x1="84"  y1="78"  x2="84"  y2="78"  stroke="#c9d1d9" stroke-width="1.8"/>
+<text x="120"  y="71"   text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="7.5">Na₂S / NMP</text>
+
+<!-- T-02 NaOAc → V-01 -->
+<line x1="84"  y1="200" x2="144" y2="200" stroke="#c9d1d9" stroke-width="1.5"/>
+<line x1="144" y1="200" x2="144" y2="135" stroke="#c9d1d9" stroke-width="1.5"/>
+<line x1="144" y1="135" x2="172" y2="135" stroke="#c9d1d9" stroke-width="1.5" marker-end="url(#am)"/>
+<text x="108"  y="195" text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="7.5">NaOAc aid</text>
+
+<!-- T-04 NMP → V-01 -->
+<line x1="84"  y1="460" x2="152" y2="460" stroke="#da77f2" stroke-width="1.8"/>
+<line x1="152" y1="460" x2="152" y2="155" stroke="#da77f2" stroke-width="1.8"/>
+<line x1="152" y1="155" x2="172" y2="155" stroke="#da77f2" stroke-width="1.8" marker-end="url(#ar)"/>
+<text x="140"  y="310" fill="#da77f2" font-family="'Share Tech Mono',monospace" font-size="7.5" transform="rotate(-90,140,310)">NMP solvent</text>
+
+<!-- T-03 DCB → R-01 (Stage 1 DCB feed) -->
+<line x1="84"  y1="330" x2="300" y2="330" stroke="#c9d1d9" stroke-width="1.8"/>
+<line x1="300" y1="330" x2="300" y2="160" stroke="#c9d1d9" stroke-width="1.8"/>
+<line x1="300" y1="160" x2="325" y2="160" stroke="#c9d1d9" stroke-width="1.8" marker-end="url(#am)"/>
+<text x="200"  y="345" text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="7.5">p-DCB (slight molar excess)</text>
+
+<!-- V-01 → R-01 -->
+<line x1="256" y1="105" x2="310" y2="105" stroke="#c9d1d9" stroke-width="2"/>
+<line x1="310" y1="105" x2="325" y2="105" stroke="#c9d1d9" stroke-width="2" marker-end="url(#am)"/>
+<text x="285"  y="97"  text-anchor="middle" fill="#c9d1d9" font-family="'Share Tech Mono',monospace" font-size="7.5">Na₂S / NMP / NaOAc</text>
+
+<!-- R-02 → QV-01 -->
+<line x1="524" y1="120" x2="548" y2="120" stroke="#f0a500" stroke-width="2.5" marker-end="url(#ao)"/>
+<line x1="548" y1="120" x2="548" y2="100" stroke="#f0a500" stroke-width="2.5"/>
+<line x1="548" y1="100" x2="548" y2="100" stroke="#f0a500" stroke-width="2.5" marker-end="url(#ao)"/>
+
+<!-- Utility annotations -->
+<!-- HP steam to R-01 jacket -->
+<line x1="325" y1="50" x2="314" y2="40" stroke="#f06595" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="312"  y="36" text-anchor="end" fill="#f06595" font-family="'Share Tech Mono',monospace" font-size="7">HP steam</text>
+<!-- HP steam to R-02 jacket -->
+<line x1="524" y1="50" x2="535" y2="40" stroke="#ff6030" stroke-width="1" stroke-dasharray="3,2"/>
+<text x="537"  y="36" fill="#ff6030" font-family="'Share Tech Mono',monospace" font-size="7">HP steam (higher)</text>
+<!-- N2 to V-01 -->
+<line x1="214" y1="45" x2="214" y2="34" stroke="#6e7681" stroke-width="1" stroke-dasharray="2,2"/>
+<text x="214"  y="30" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">N₂</text>
+
+<!-- ══════════════════════════════════
+     STREAM TAGS
+══════════════════════════════════════ -->
+<g font-family="'Share Tech Mono',monospace" font-size="7.5" fill="#0d1117">
+  <rect x="110" y="68" width="20" height="11" rx="2" fill="#c9d1d9"/>
+  <text x="120" y="77" text-anchor="middle">S1</text>
+
+  <rect x="88"  y="192" width="20" height="11" rx="2" fill="#c9d1d9"/>
+  <text x="98"  y="201" text-anchor="middle">S2</text>
+
+  <rect x="88"  y="322" width="20" height="11" rx="2" fill="#c9d1d9"/>
+  <text x="98"  y="331" text-anchor="middle">S3</text>
+
+  <rect x="88"  y="452" width="20" height="11" rx="2" fill="#da77f2"/>
+  <text x="98"  y="461" text-anchor="middle">S4</text>
+
+  <rect x="262" y="97"  width="20" height="11" rx="2" fill="#c9d1d9"/>
+  <text x="272" y="106" text-anchor="middle">S5</text>
+
+  <rect x="436" y="113" width="20" height="11" rx="2" fill="#f0a500"/>
+  <text x="446" y="122" text-anchor="middle">S6</text>
+
+  <rect x="556" y="113" width="20" height="11" rx="2" fill="#f0a500"/>
+  <text x="566" y="122" text-anchor="middle">S7</text>
+
+  <rect x="630" y="216" width="20" height="11" rx="2" fill="#4dabf7"/>
+  <text x="640" y="225" text-anchor="middle">S8</text>
+
+  <rect x="636" y="282" width="20" height="11" rx="2" fill="#a9e34b"/>
+  <text x="646" y="291" text-anchor="middle">S9</text>
+
+  <rect x="952" y="282" width="20" height="11" rx="2" fill="#a9e34b"/>
+  <text x="962" y="291" text-anchor="middle">S10</text>
+
+  <rect x="340" y="22"  width="20" height="11" rx="2" fill="#da77f2"/>
+  <text x="350" y="31"  text-anchor="middle" fill="#0d1117">S11</text>
+</g>
+
+<!-- Stage label banner between reactors -->
+<rect x="330" y="220" width="190" height="24" rx="3" fill="#1a1408" stroke="#f0a500" stroke-width="1"/>
+<text x="425" y="231" text-anchor="middle" fill="#f0a500" font-family="'Share Tech Mono',monospace" font-size="8" font-weight="bold">TWO-STAGE POLYMERISATION</text>
+<text x="425" y="240" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">US 4,910,294 · EP 0256757 · EP 0259984</text>
+
+<!-- Quench annotation -->
+<rect x="543" y="270" width="140" height="22" rx="3" fill="#0a1a2a" stroke="#4dabf7" stroke-width="1"/>
+<text x="613" y="280" text-anchor="middle" fill="#4dabf7" font-family="'Share Tech Mono',monospace" font-size="7.5">VLE-controlled quench</text>
+<text x="613" y="289" text-anchor="middle" fill="#6e7681" font-family="'Share Tech Mono',monospace" font-size="7">US 7,312,300 (particle size ctrl)</text>
+
+</svg>
+</div>
+
+<!-- Legend -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-line" style="background:#c9d1d9"></div><span>Process stream</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#f06595"></div><span>Hot / steam (Stage 1)</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#ff6030"></div><span>Hot / steam (Stage 2 – higher T)</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#4dabf7"></div><span>Aqueous / cold stream</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#a9e34b"></div><span>Solid / polymer stream</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#da77f2"></div><span>NMP recycle</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#f0a500"></div><span>Stage-1 reactor effluent</span></div>
+  <div class="legend-item"><div class="legend-line" style="background:#e05c5c"></div><span>Waste / effluent to ETP</span></div>
+</div>
+
+<!-- Conditions table -->
+<table class="cond-table">
+<tr>
+  <th>Unit</th><th>Description</th><th>T (°C)</th><th>P (MPa)</th><th>Key process detail</th><th class="ref">Patent basis</th>
+</tr>
+<tr>
+  <td>MV-01</td><td>NaSH + NaOH mix vessel (Na₂S generation)</td><td>Ambient–60</td><td>Atm.</td>
+  <td>NaSH aq. + NaOH → Na₂S in NMP in-situ; preferred over anhydrous Na₂S·9H₂O for purity/MW control. N₂ blanketed.</td>
+  <td class="ref">US 20050089688</td>
+</tr>
+<tr>
+  <td>T-02</td><td>NaOAc dissolving tank</td><td>Ambient</td><td>Atm.</td>
+  <td>Sodium acetate added as polymerisation aid (~0.05–0.2 mol/mol Na₂S); promotes granular, high-MW product and reduces wall scale.</td>
+  <td class="ref">US 3,919,177; Hoechst practice</td>
+</tr>
+<tr>
+  <td>V-01</td><td>Dehydration autoclave</td><td>185–205</td><td>0.3–0.5</td>
+  <td>Water from NaSH/NaOH solution and NMP moisture removed by heating; overhead condensed in E-01. Target: &lt;0.3 mol H₂O / mol S before DCB charge. N₂ atmosphere. Ti or SS316L.</td>
+  <td class="ref">US 4,910,294</td>
+</tr>
+<tr>
+  <td>R-01</td><td>Stage-1 polycondensation autoclave</td><td>210–230</td><td>0.5–0.8</td>
+  <td>Na₂S + p-DCB (slight molar excess of DCB, 1.0–1.02 mol/mol) in NMP. NaOAc present. Proceeds to 80–95% conversion giving halogen-terminated prepolymer; NaCl precipitates in situ. Hastelloy C-276 or Ti. Scale prevention via agitator design.</td>
+  <td class="ref">EP 0256757; US 4,910,294</td>
+</tr>
+<tr>
+  <td>R-02</td><td>Stage-2 high-temperature reactor</td><td>250–270</td><td>0.7–1.5</td>
+  <td>Controlled water addition (6–15 mol/kg NMP) forms two-phase system; drives chain-growth of prepolymer to high-MW linear PPS (melt viscosity 100–3000 poise @ 310°C). Reaction time 0.5–4 h. No cross-linking step required. Hastelloy C-276.</td>
+  <td class="ref">EP 0259984; US 4,910,294; EP 0256757</td>
+</tr>
+<tr>
+  <td>QV-01</td><td>Quench vessel</td><td>~200 → cool</td><td>Controlled</td>
+  <td>Controlled quench-water addition determined by VLE calculation to give target PPS particle size distribution (typ. 100–500 µm median). Particle size affects filtration and downstream processability. Excess quench → fines; insufficient → large agglomerates.</td>
+  <td class="ref">US 7,312,300</td>
+</tr>
+<tr>
+  <td>F-01</td><td>Pressure filter</td><td>80–100</td><td>Atm.</td>
+  <td>Separates PPS cake from NMP/NaCl filtrate. Wet cake washed in-filter with hot NMP then hot water to begin NaCl removal. Filtrate (NMP + NaCl) → C-01.</td>
+  <td class="ref">General practice</td>
+</tr>
+<tr>
+  <td>C-01</td><td>NMP recovery distillation column</td><td>202 (bp)</td><td>Atm./vac.</td>
+  <td>NMP overhead (bp 202°C) recycled to T-04. Bottoms: NaCl brine + trace NMP by-products (thiophenol, dihydrofuranone, tetrahydrothiophenone per DE19614126). Brine → ETP / MVR evaporator. Closed-loop NMP containment essential (SVHC/REACH).</td>
+  <td class="ref">DE 19614126A1</td>
+</tr>
+<tr>
+  <td>W-01</td><td>Multi-stage hot water wash</td><td>90–100</td><td>Atm.</td>
+  <td>3–6 DI water wash stages; endpoint monitored by wash-water conductivity (target: Cl⁻ &lt;50 ppm in product for electronics grade, &lt;150 ppm general grade). Counter-current preferred for water economy.</td>
+  <td class="ref">US 4,490,522</td>
+</tr>
+<tr>
+  <td>D-01</td><td>Decanter centrifuge</td><td>60–80</td><td>Atm.</td>
+  <td>Dewaters washed PPS cake to &lt;5 wt% moisture. Centrate (dilute NaCl aq.) to ETP.</td>
+  <td class="ref">General practice</td>
+</tr>
+<tr>
+  <td>DR-01</td><td>N₂-swept flash / rotary dryer</td><td>120–150</td><td>Atm.</td>
+  <td>N₂ atmosphere prevents oxidation (critical for linear Fortron grades — no intentional cross-linking). Residual NMP target &lt;100 ppm. Off-gas scrubbed for NMP recovery before vent.</td>
+  <td class="ref">US 4,910,294; general practice</td>
+</tr>
+<tr>
+  <td>SC-01</td><td>Sifter / classifier</td><td>Ambient</td><td>Atm.</td>
+  <td>Removes oversize agglomerates and fines. Oversize reground. Fines may be recycled or blended. Final powder particle size distribution certified per batch.</td>
+  <td class="ref">General practice</td>
+</tr>
+<tr>
+  <td>EX-01</td><td>Twin-screw compounding extruder</td><td>280–330</td><td>—</td>
+  <td>Compounds PPS powder with glass fibre (30–40 wt%), mineral fillers, lubricants (PTFE), stabilisers. Underwater pelletiser preferred for Fortron grades. Some grades sold as unfilled powder direct from SC-01.</td>
+  <td class="ref">US 20100004375</td>
+</tr>
+<tr>
+  <td>S-01</td><td>Product silo / packaging</td><td>Ambient</td><td>—</td>
+  <td>N₂-padded storage. QC release: melt viscosity (310°C, 1200 s⁻¹), ash, Cl⁻, colour, GPC (Mw/Mn), extrusion rate. Packed as 25 kg bags or bulk octabins.</td>
+  <td class="ref">—</td>
+</tr>
+</table>
+
+<div class="notes">
+  <strong>Key differences vs. generic Macallum PFD — Fortron-specific features:</strong><br>
+  • <strong>NaSH + NaOH sulfide source (not Na₂S·9H₂O):</strong> Hoechst Celanese practice uses aqueous NaSH + NaOH to generate Na₂S in-situ in NMP (MV-01). Avoids crystallisation-water handling issues and gives better ionic purity control.<br>
+  • <strong>NaOAc polymerisation aid (T-02):</strong> Sodium acetate added at ~0.05–0.2 mol/mol S. Promotes granular, higher-MW product and suppresses reactor wall scale — critical for commercial batch operation.<br>
+  • <strong>Two-stage reactor sequence (R-01 → R-02):</strong> Stage 1 at 210–230°C drives prepolymer formation to ~80–95% conversion. Stage 2 at 250–270°C with deliberate water injection (6–15 mol/kg NMP) creates a two-phase system that drives chain-growth to high-MW linear PPS. This is the defining feature of the Hoechst/Ticona process versus Phillips (Ryton) single-stage + curing route.<br>
+  • <strong>No curing oven:</strong> Fortron grades are linear, high-MW PPS. MW is built entirely in-reactor. No post-polymerisation air oxidation/cross-linking is applied — unlike Ryton P-grade and similar. This gives film/fibre processability and narrow MWD.<br>
+  • <strong>VLE-controlled quench (QV-01):</strong> Water addition to precipitate PPS from solution is calculated from vapour-liquid equilibrium models (not empirical), giving tight control of particle size distribution — critical for filtration, washing efficiency, and powder flowability.<br>
+  • <strong>Titanium / Hastelloy C-276 throughout reactors:</strong> Required for HCl/NaCl service at temperature. Wall-scale management via high-shear agitator geometry is a key engineering challenge noted in the patent literature.<br>
+  • <strong>N₂ drying (not air):</strong> Fortron linear grades are dried under N₂ to prevent premature oxidation of chain ends. Contrast with older cured grades dried/cured in air.<br>
+  • <strong>NMP impurity profile (DE 19614126A1):</strong> Fortron-specific GC/MS data show thiophenol (~30 ppm), dihydrofuranone (~10 ppm), tetrahydrothiophenone (~10 ppm) as characteristic NMP decomposition by-products — useful for process forensics and ETP design.
+</div>
+
+
+<div style="margin-top:24px; padding:12px 16px; background:#0d1117; border:1px solid #30363d; border-radius:4px; font-family:'Share Tech Mono',monospace; font-size:0.74rem; color:#6e7681; line-height:1.7;">
+  <strong style="color:#c9d1d9;">DISCLAIMER</strong><br>
+  This process flow diagram is an original schematic interpretation prepared from publicly available patent literature, including but not limited to US 4,910,294; EP 0256757; EP 0259984; US 7,312,300; DE 19614126A1; and related prior art. It is provided for educational and informational purposes only.<br><br>
+  This diagram does <strong style="color:#c9d1d9;">not</strong> represent the proprietary plant designs, actual operating procedures, current manufacturing processes, or confidential technical information of Celanese Corporation, Ticona LLC, or any of their affiliates. No confidential or trade secret information has been used in its preparation.<br><br>
+  Patent citations are included solely as bibliographic references to public documents. Celanese®, Ticona®, and Fortron® are registered trademarks of their respective owners. All trademarks are acknowledged.<br><br>
+  The author makes no warranty as to the accuracy, completeness, or fitness for any particular purpose of the information presented. This diagram should not be relied upon for process design, engineering, or commercial decision-making without independent verification.
+</div>
+
+</body>
+</html>
